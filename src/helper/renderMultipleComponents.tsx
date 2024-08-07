@@ -6,7 +6,7 @@ const renderMultipleComponents = <P extends object>(
 ) => {
   const items: ReactElement[] = [];
   for (let i = 0; i < arrayOfProps.length; i++) {
-    items.push(<Componment {...arrayOfProps[i]} />);
+    items.push(<Componment {...arrayOfProps[i]} key={i} />);
   }
   return <>{items}</>;
 };
