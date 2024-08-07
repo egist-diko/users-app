@@ -12,10 +12,17 @@ interface RequestConfig {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   url: string;
   data?: any;
-  params?: any;
+  params?: Record<string, any>;
+  wantHeaders?: boolean;
 }
 
-const makeRequest = async ({ method, url, data, params }: RequestConfig) => {
+const makeRequest = async ({
+  method,
+  url,
+  data,
+  params,
+  wantHeaders,
+}: RequestConfig) => {
   try {
     const response = await axiosInstance({
       method,
@@ -23,6 +30,14 @@ const makeRequest = async ({ method, url, data, params }: RequestConfig) => {
       data,
       params,
     });
+    if (wantHeaders) {
+      if (response.headers['x-pagination-pages']) {
+        return {
+          data: response.data,
+          totalPages: response.headers['x-pagination-pages'],
+        };
+      }
+    }
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

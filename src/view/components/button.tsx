@@ -4,6 +4,7 @@ export interface ButtonProps {
   content: string;
   className: string;
   onClickFunction: () => void;
+  disabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {

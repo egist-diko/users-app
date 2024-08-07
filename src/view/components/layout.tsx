@@ -11,7 +11,9 @@ export const Layout: FC<LayoutProps> = () => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <div className='p-8'>
+        <Outlet />
+      </div>
       <Footer />
     </>
   );
