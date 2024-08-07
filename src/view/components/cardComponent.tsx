@@ -8,7 +8,8 @@ export interface UserCardProps {
   status: 'active' | 'inactive';
 }
 
-const UserCard: React.FC<UserCardProps> = ({ name, email, gender, status }) => {
+const UserCard: React.FC<UserCardProps> = (props) => {
+  const { name, email, gender, status } = props;
   return (
     <div className='bg-white shadow-lg rounded-lg p-6 max-w-sm mx-auto'>
       <h2 className='text-2xl font-bold mb-2'>{name}</h2>

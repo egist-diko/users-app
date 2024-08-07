@@ -7,7 +7,7 @@ const fetchUsers = async (page: number) => {
       url: '/users',
       params: {
         page: page,
-        per_page: 4,
+        per_page: 10,
       },
       wantHeaders: true,
     });

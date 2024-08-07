@@ -8,11 +8,8 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const Pagination = ({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: PaginationProps) => {
+const Pagination = (props: PaginationProps) => {
+  const { currentPage, totalPages, onPageChange } = props;
   const handlePrevClick = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);

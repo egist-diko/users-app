@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button, { ButtonProps } from './button';
-import renderMultipleComponents from '../../helper/renderMultipleComponents';
+import Button, { ButtonProps } from '../button';
+import renderMultipleComponents from '../../../helper/renderMultipleComponents';
 
 export const Navbar = () => {
   const navigate = useNavigate();

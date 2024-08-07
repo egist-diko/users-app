@@ -1,11 +1,12 @@
 import { ComponentType, lazy, Suspense } from 'react';
-import { Layout } from './view/components/layout';
+import { Layout } from './view/components/layout/layout';
+import LoadingScreen from './view/components/loadingScreen';
 
 const Loadable =
   <P extends object>(Component: ComponentType<P>) =>
   (props: P) =>
     (
-      <Suspense fallback={<div>Wait please</div>}>
+      <Suspense fallback={<LoadingScreen />}>
         <Component {...props} />
       </Suspense>
     );
