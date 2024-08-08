@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import UserCard, { UserCardProps } from '../components/cardComponent';
 import renderMultipleComponents from '../../helper/renderMultipleComponents';
 import Pagination from '../components/pagination';
-import fetchUsers from '../../api/usersApi/userApi';
 import LoadingScreen from '../components/loadingScreen';
+import { AxiosResponse } from 'axios';
+import usersApi from '../../api/usersApi/userApi';
 
 const DisplayUsers = () => {
   const [userData, setUserData] = useState<Array<UserCardProps>>([]);
@@ -11,14 +12,18 @@ const DisplayUsers = () => {
   const [pageState, setPageState] = useState<number>(1);
   const [totalPagesState, setTotalPagesState] = useState<number>(0);
 
-  useEffect(() => {
+  const getUsers = async () => {
     setLoadingState(true);
-    const result = fetchUsers(pageState);
-    result.then((res) => {
-      setUserData(res.data);
-      setLoadingState(false);
-      setTotalPagesState(res.totalPages);
-    });
+    const result: AxiosResponse<any, any> = await usersApi.fetchUsers(
+      pageState
+    );
+    setUserData(result.data);
+    setTotalPagesState(result.headers['x-pagination-pages']);
+    setLoadingState(false);
+  };
+
+  useEffect(() => {
+    getUsers();
   }, [pageState]);
 
   if (loadingState) {

@@ -11,8 +11,7 @@ const Loadable =
       </Suspense>
     );
 
-const CreateUser = Loadable(lazy(() => import('./view/pages/createUser')));
-const DisplayUser = Loadable(lazy(() => import('./view/pages/displayUser')));
+const UserForm = Loadable(lazy(() => import('./view/pages/userForm')));
 const DisplayUsers = Loadable(lazy(() => import('./view/pages/displayUsers')));
 
 const routes = [
@@ -30,11 +29,11 @@ const routes = [
       },
       {
         path: '/users/:id',
-        element: <DisplayUser />,
+        element: <UserForm />,
       },
       {
-        path: '/createUser',
-        element: <CreateUser />,
+        path: '/UserForm',
+        element: <UserForm />,
       },
     ],
   },

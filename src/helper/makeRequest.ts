@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const axiosInstance = axios.create({
   baseURL: 'https://gorest.co.in/public/v2',
@@ -13,7 +13,6 @@ interface RequestConfig {
   url: string;
   data?: any;
   params?: Record<string, any>;
-  wantHeaders?: boolean;
 }
 
 const makeRequest = async ({
@@ -21,8 +20,7 @@ const makeRequest = async ({
   url,
   data,
   params,
-  wantHeaders,
-}: RequestConfig) => {
+}: RequestConfig): Promise<AxiosResponse<any, any>> => {
   try {
     const response = await axiosInstance({
       method,
@@ -30,18 +28,13 @@ const makeRequest = async ({
       data,
       params,
     });
-    if (wantHeaders) {
-      if (response.headers['x-pagination-pages']) {
-        return {
-          data: response.data,
-          totalPages: response.headers['x-pagination-pages'],
-        };
-      }
-    }
-    return response.data;
+    return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error('Axios error:', error.message);
+      if (error.response) {
+        return error.response;
+      }
     } else {
       console.error('Error:', error);
     }
