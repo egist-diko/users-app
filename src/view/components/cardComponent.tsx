@@ -9,10 +9,12 @@ export interface UserCardProps {
   email: string;
   gender: string;
   status: 'active' | 'inactive';
+  onUpdate?: (props: UserCardProps) => void;
+  onDelete?: (id: number) => void;
 }
 
-const UserCard: React.FC<UserCardProps> = (props) => {
-  const { name, email, gender, status, id } = props;
+const UserCard = (props: UserCardProps) => {
+  const { name, email, gender, status, id, onUpdate, onDelete } = props;
   const navigate = useNavigate();
   const buttonArray: Array<ButtonProps> = [
     {
@@ -20,18 +22,22 @@ const UserCard: React.FC<UserCardProps> = (props) => {
       className:
         'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500',
       type: 'button',
-      onClickFunction: () =>
-        navigate(`/users/${id}`, {
-          replace: true,
-          state: { userData: props },
-        }),
+      onClickFunction: () => {
+        if (onUpdate) {
+          onUpdate({ name, email, gender, status, id });
+        }
+      },
     },
     {
       content: 'Delete',
       className:
         'bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500',
       type: 'button',
-      onClickFunction: () => {},
+      onClickFunction: () => {
+        if (onDelete) {
+          onDelete(id);
+        }
+      },
     },
   ];
   return (

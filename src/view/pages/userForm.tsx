@@ -4,10 +4,12 @@ import { SchemaConfig } from '../../helper/generateYupSchema';
 import usersApi, { UserInterface } from '../../api/usersApi/userApi';
 import Popup from '../components/popup';
 import { useLocation } from 'react-router-dom';
+import PopupModal from '../components/popupModal';
 
 const UserForm = () => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [status, setStatus] = useState<number>(0);
+  const [submittionState, setSubmittionState] = useState<boolean>(true);
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState<'success' | 'failure'>(
     'success'
@@ -29,7 +31,7 @@ const UserForm = () => {
   useEffect(() => {
     if (status === 0) {
       return;
-    } else if (status === 201) {
+    } else if (status === 201 || status === 200) {
       setMessageType('success');
     } else {
       setMessageType('failure');
@@ -38,7 +40,7 @@ const UserForm = () => {
     setTimeout(() => {
       setShowPopup(false);
     }, 3000);
-  }, [message]);
+  }, [submittionState]);
 
   const inputArray: Array<FormInput<FieldType>> = [
     {
@@ -85,7 +87,18 @@ const UserForm = () => {
 
   const onSubmit = async (values: UserInterface) => {
     if (defaultData) {
-      console.log(values);
+      const result = await usersApi.updateUser(values);
+      setStatus(result.status);
+      if (result.status === 200) {
+        setMessage('User update was successful!');
+      } else {
+        if (result.data) {
+          setMessage(`${result.data[0].field} ${result.data[0].message}`);
+        } else {
+          setMessage(result.statusText);
+        }
+      }
+      console.log(result);
     } else {
       const result = await usersApi.createUser(values);
       setStatus(result.status);
@@ -100,9 +113,10 @@ const UserForm = () => {
       }
       console.log(result);
     }
+    setSubmittionState(!submittionState);
   };
   return (
-    <>
+    <div className='flex justify-center items-center p=10 w-full border-blue-600 border-4 rounded-lg'>
       <Form
         onSubmit={onSubmit}
         schema={schema}
@@ -110,9 +124,17 @@ const UserForm = () => {
         defaultValues={defaultData}
       />
       {showPopup && (
-        <Popup message={message} type={messageType} onClose={onPopupClose} />
+        <PopupModal
+          child={
+            <Popup
+              message={message}
+              type={messageType}
+              onClose={onPopupClose}
+            />
+          }
+        />
       )}
-    </>
+    </div>
   );
 };
 

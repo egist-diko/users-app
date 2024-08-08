@@ -9,7 +9,7 @@ interface PopupProps {
 const Popup = (props: PopupProps) => {
   const { type, message, onClose } = props;
   return (
-    <div className='fixed inset-0 flex items-center justify-center z-50'>
+    <div className='flex items-center justify-center w-full absolute bottom-1/2'>
       <div
         className={`relative py-12 px-32 mx-4 w-full max-w-2xl bg-white shadow-lg rounded-lg flex justify-center items-center space-x-4 ${
           type === 'success' ? 'border-green-500' : 'border-red-500'

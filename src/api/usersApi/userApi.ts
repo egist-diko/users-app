@@ -38,5 +38,28 @@ const usersApi = {
       throw error;
     }
   },
+  updateUser: async (body: UserInterface): Promise<AxiosResponse<any, any>> => {
+    try {
+      const result = await makeRequest({
+        method: 'PUT',
+        url: `/users/${body.id}`,
+        data: body,
+      });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+  deleteUser: async (id: number): Promise<AxiosResponse<any, any>> => {
+    try {
+      const result = await makeRequest({
+        method: 'DELETE',
+        url: `/users/${id}`,
+      });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 export default usersApi;

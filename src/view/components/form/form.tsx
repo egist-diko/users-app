@@ -50,7 +50,7 @@ export const Form = (props: FormProps) => {
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='flex flex-col space-y-10'
+        className='flex flex-col space-y-10 w-full p-10 '
       >
         {renderForm(inputArray)}
         <Button
