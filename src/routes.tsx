@@ -32,7 +32,7 @@ const routes = [
         element: <UserForm />,
       },
       {
-        path: '/UserForm',
+        path: '/createUser',
         element: <UserForm />,
       },
     ],

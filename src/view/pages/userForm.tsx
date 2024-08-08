@@ -62,6 +62,7 @@ const UserForm = () => {
       data: {
         name: 'gender',
         label: 'Gender',
+        value: defaultData?.gender,
         options: [
           { label: 'Male', value: 'male' },
           { label: 'Female', value: 'female' },
@@ -72,7 +73,8 @@ const UserForm = () => {
       type: 'radio',
       data: {
         name: 'status',
-        label: 'Gender',
+        label: 'Status',
+        value: defaultData?.status,
         options: [
           { label: 'Active', value: 'active' },
           { label: 'Inactive', value: 'inactive' },

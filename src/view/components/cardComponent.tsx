@@ -21,7 +21,7 @@ const UserCard: React.FC<UserCardProps> = (props) => {
         'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500',
       type: 'button',
       onClickFunction: () =>
-        navigate(`/users/:${id}`, {
+        navigate(`/users/${id}`, {
           replace: true,
           state: { userData: props },
         }),

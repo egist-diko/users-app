@@ -14,6 +14,7 @@ export interface BasicInputProps {
   onChangeFunction?: (value: string) => void;
   className?: string;
   label?: string;
+  value?: string;
 }
 
 export type FieldType = 'input' | 'radio';

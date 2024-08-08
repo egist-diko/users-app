@@ -11,7 +11,7 @@ const Popup = (props: PopupProps) => {
   return (
     <div className='fixed inset-0 flex items-center justify-center z-50'>
       <div
-        className={`relative p-6 mx-4 max-w-sm w-full bg-white shadow-lg rounded-lg ${
+        className={`relative py-12 px-32 mx-4 w-full max-w-2xl bg-white shadow-lg rounded-lg flex justify-center items-center space-x-4 ${
           type === 'success' ? 'border-green-500' : 'border-red-500'
         } border-2`}
       >
@@ -24,7 +24,7 @@ const Popup = (props: PopupProps) => {
         <div
           className={`flex items-center justify-center w-12 h-12 rounded-full ${
             type === 'success' ? 'bg-green-100' : 'bg-red-100'
-          } mb-4`}
+          }`}
         >
           <svg
             className={`w-6 h-6 ${

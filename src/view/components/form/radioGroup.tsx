@@ -13,8 +13,8 @@ export interface RadioGroupProps extends BasicInputProps {
 }
 
 const RadioGroup = (props: RadioGroupProps) => {
-  const { options, name, onChangeFunction, label } = props;
-  const [selectedValue, setSelectedValue] = useState('');
+  const { options, name, onChangeFunction, label, value } = props;
+  const [selectedValue, setSelectedValue] = useState(value ?? '');
   const {
     formState: { errors },
     register,

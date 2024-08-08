@@ -6,7 +6,6 @@ import { BasicInputProps } from './form';
 export interface InputComponentProps extends BasicInputProps {
   type?: 'text' | 'password' | 'email' | 'number'; // Add any other input types you need
   placeholder?: string;
-  value?: string;
 }
 
 const InputComponent = (props: InputComponentProps) => {
