@@ -98,7 +98,6 @@ const UserForm = () => {
           setMessage(result.statusText);
         }
       }
-      console.log(result);
     } else {
       const result = await usersApi.createUser(values);
       setStatus(result.status);
@@ -111,7 +110,6 @@ const UserForm = () => {
           setMessage(result.statusText);
         }
       }
-      console.log(result);
     }
     setSubmittionState(!submittionState);
   };

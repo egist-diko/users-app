@@ -26,7 +26,6 @@ const DisplayUsers = () => {
   const onModalDelete = async (id: number) => {
     setLoadingState(true);
     const result: AxiosResponse<any, any> = await usersApi.deleteUser(id);
-    console.log(result);
     getUsers();
     setShowDialog(false);
   };
