@@ -14,33 +14,55 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+## Project Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Download the project from github.
+2. npm i command do install all necessary libraries
+3. create a .env file and put your token as REACT_APP_AUTH_TOKEN , I did not include it to avoid leaks but if required please email me and I will provide my token
+4. npm start runs the app , after it is loaded you can check the application
 
-### `npm run build`
+## Project Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Project Pages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Project consists of 3 pages /users , /createUser , /users/id.
+The /users and / are the same page
+As a React App this is a single page application so no navigation with links was used.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Content of Pages
 
-### `npm run eject`
+#### The layout
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+All pages have the same layout consisting of a navigation bar and a footer
+Also there is a modal component that can be accessed from the entire website
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Users page
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The users page contains a couple of cards that are filled with API data.
+The page has pagination ,loading screen and popup in case of deletion.
+Each card has an update and a delete button both functional.
+The Delete button displays a popup and if you again press delete the item is removed from the list , if canceled the popup goes away without any change to the users list
+The update button will send you to the /users/id page where you will find a form with all the data ready to be edited , but more on that later.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Create page
 
-## Learn More
+The create user page has a form that is dynamically generated with validations that are also dynamically generated. You fill the form correctly and a popup shows up to tell you that the user has been added successfully, on the other hand if there is an error like if you try to resubmit the same user , the API gives back an error message that is going to be displayed in the popup with fail css style
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Users/id page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This is the same page as create page , since they both do the same job it would be ashame not to reuse the entire page, since this is the entire idea of React.
+The page does not create users however , it's functionality is in updating a current user.
+
+### Application Features
+
+1. The website is mostly dynamic , with a lot of reusable componets, and even pages.
+   It also has a lot of functions that allow you to mass produce dynamically the code that you need.
+2. The most important libraries are :
+   2.1) Tailwind for styling
+   2.2) Yup and React-Hook-Form for form handling and validation
+   2.3) Axios for api calls
+   2.4) Typescript for type checking the entire application
+   2.5) React-router-dom for application routing
+   2.6) And a special shoutout to React itself since it made all of this possible
+3. Because of the dynamic nature and sticking to typescript it is fairly easy to navigate the project and create bigger components, f.e if you wanted to build another form from scratch you could reuse the form component in the project and give it an array to build an entirely new form with ready to go handling and validation
+
