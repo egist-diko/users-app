@@ -13,6 +13,7 @@ const Loadable =
 
 const UserForm = Loadable(lazy(() => import('./view/pages/userForm')));
 const DisplayUsers = Loadable(lazy(() => import('./view/pages/displayUsers')));
+const DisplayUser = Loadable(lazy(() => import('./view/pages/displayUser')));
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
       {
         path: '/users/:id',
         element: <UserForm />,
+      },
+      {
+        path: '/user/:id',
+        element: <DisplayUser />,
       },
       {
         path: '/createUser',

@@ -1,22 +1,38 @@
 import React from 'react';
 import renderMultipleComponents from '../../helper/renderMultipleComponents';
 import Button, { ButtonProps } from './button';
-import { useNavigate } from 'react-router-dom';
 
-export interface UserCardProps {
+export interface UserProps {
   id: number;
   name: string;
   email: string;
   gender: string;
   status: 'active' | 'inactive';
-  onUpdate?: (props: UserCardProps) => void;
+}
+
+export interface UserCardProps {
+  userData: UserProps;
+  showButtons?: boolean;
+  onUpdate?: (userData: UserProps) => void;
   onDelete?: (id: number) => void;
+  onShow?: (id: number) => void;
 }
 
 const UserCard = (props: UserCardProps) => {
-  const { name, email, gender, status, id, onUpdate, onDelete } = props;
-  const navigate = useNavigate();
+  const { userData, onUpdate, onDelete, onShow, showButtons = true } = props;
+  const { name, email, gender, status, id } = userData;
   const buttonArray: Array<ButtonProps> = [
+    {
+      content: 'Show',
+      className:
+        'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500',
+      type: 'button',
+      onClickFunction: () => {
+        if (onShow) {
+          onShow(id);
+        }
+      },
+    },
     {
       content: 'Update',
       className:
@@ -24,7 +40,7 @@ const UserCard = (props: UserCardProps) => {
       type: 'button',
       onClickFunction: () => {
         if (onUpdate) {
-          onUpdate({ name, email, gender, status, id });
+          onUpdate(userData);
         }
       },
     },
@@ -52,9 +68,11 @@ const UserCard = (props: UserCardProps) => {
       >
         Status: {status}
       </p>
-      <div className='mt-4 flex gap-2'>
-        {renderMultipleComponents(Button, buttonArray)}
-      </div>
+      {showButtons && (
+        <div className='mt-4 flex gap-2'>
+          {renderMultipleComponents(Button, buttonArray)}
+        </div>
+      )}
     </div>
   );
 };

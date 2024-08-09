@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import UserCard, { UserCardProps } from '../components/cardComponent';
+import UserCard, {
+  UserCardProps,
+  UserProps,
+} from '../components/cardComponent';
 import renderMultipleComponents from '../../helper/renderMultipleComponents';
 import Pagination from '../components/pagination';
 import LoadingScreen from '../components/loadingScreen';
@@ -17,10 +20,10 @@ const DisplayUsers = () => {
   const [userID, setUserId] = useState<number>(0);
   const navigate = useNavigate();
 
-  const onUpdate = (props: UserCardProps) =>
-    navigate(`/users/${props.id}`, {
+  const onUpdate = (userData: UserProps) =>
+    navigate(`/users/${userData.id}`, {
       replace: true,
-      state: { userData: props },
+      state: { userData: userData },
     });
 
   const onModalDelete = async (id: number) => {
@@ -35,6 +38,13 @@ const DisplayUsers = () => {
     setUserId(id);
   };
 
+  const onShow = (id: number) => {
+    navigate(`/user/${id}`, {
+      replace: true,
+      state: { id },
+    });
+  };
+
   const getUsers = async () => {
     setLoadingState(true);
     const result: AxiosResponse<any, any> = await usersApi.fetchUsers(
@@ -42,7 +52,12 @@ const DisplayUsers = () => {
     );
     let userTempData = [];
     for (let i = 0; i < result.data.length; i++) {
-      userTempData.push({ ...result.data[i], onUpdate, onDelete });
+      userTempData.push({
+        userData: result.data[i],
+        onUpdate,
+        onDelete,
+        onShow,
+      });
     }
     setUserData(userTempData);
     setTotalPagesState(result.headers['x-pagination-pages']);

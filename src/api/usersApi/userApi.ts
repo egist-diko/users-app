@@ -61,5 +61,16 @@ const usersApi = {
       throw error;
     }
   },
+  getUser: async (id: number): Promise<AxiosResponse<any, any>> => {
+    try {
+      const result = await makeRequest({
+        method: 'GET',
+        url: `/users/${id}`,
+      });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 export default usersApi;
