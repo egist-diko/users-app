@@ -104,10 +104,10 @@ const UserForm = () => {
       if (result.status === 201) {
         setMessage('User creation was successful!');
       } else {
-        if (result.data) {
+        if (result.data[0]) {
           setMessage(`${result.data[0].field} ${result.data[0].message}`);
         } else {
-          setMessage(result.statusText);
+          setMessage('Something went wrong!!!');
         }
       }
     }
