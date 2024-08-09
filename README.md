@@ -48,10 +48,14 @@ The update button will send you to the /users/id page where you will find a form
 
 The create user page has a form that is dynamically generated with validations that are also dynamically generated. You fill the form correctly and a popup shows up to tell you that the user has been added successfully, on the other hand if there is an error like if you try to resubmit the same user , the API gives back an error message that is going to be displayed in the popup with fail css style
 
-#### Users/id page
+#### PUT Users/id page
 
 This is the same page as create page , since they both do the same job it would be ashame not to reuse the entire page, since this is the entire idea of React.
 The page does not create users however , it's functionality is in updating a current user.
+
+#### GET User/id page
+
+This page just gets the data of a single user and displays it in a UserCard as per the requirements of the project.
 
 ### Application Features
 
