@@ -25,7 +25,7 @@ You will also see any lint errors in the console.
 
 ### Project Pages
 
-Project consists of 3 pages /users , /createUser , /users/id.
+Project consists of 3 pages /users , /createUser , /users/id /user/id.
 The /users and / are the same page
 As a React App this is a single page application so no navigation with links was used.
 
